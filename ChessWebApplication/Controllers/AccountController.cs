@@ -144,6 +144,7 @@ namespace ChessWebApplication.Controllers
             return View();
         }
 
+       
         //
         // POST: /Account/Register
         [HttpPost]
