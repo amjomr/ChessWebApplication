@@ -1,0 +1,11 @@
+1- 10 colleges
+2- compete each saturday
+3- up to 3 sets ( morning, afternoon, eveining)
+4- 6 weeks long, but may extend for 2 more weeks due to some need of re-scheduling
+5- Each league team must compete two times against each of the other league teams
+6- Once the names of the teams and the tournament start and end dates are entered in to the system, a tournament schedule of competitions for each week must be generated,showing which teams are playing each other. Anyone can view the schedule.
+7- be able to alter
+8- The winning team will get a score of 5 points, and the losing team will be scored 1 point. If they tie, then the 2 teams will each be given 3 points.
+9- Information entry such as team names,tournament dates and tournament scores into this system may only be performed by a special class of people called tournament-officials
+10- Everyone is allowed to view the team names, tournament schedule, tournament results of teams by week, and the weekly ranking of the teams. This weekly information is kept in the system, and viewer may view the history of scores and rankings of any week.
+
