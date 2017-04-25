@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using ChessWebApplication.Models;
 
-// This is comment
+// This is comment 2
 
 namespace ChessWebApplication.Controllers
 {
