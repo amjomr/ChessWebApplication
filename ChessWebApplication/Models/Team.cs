@@ -11,6 +11,8 @@ namespace ChessWebApplication.Models
         public int ID { get; set; }
         public string Name { get; set; }
         public int Totalscore { get; set; }
+
+        public List<Schedule> Schedules { get; set; }
     }
 
     public class TeamDBContext : DbContext
