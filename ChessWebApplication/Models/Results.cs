@@ -13,8 +13,8 @@ namespace ChessWebApplication.Models
         public string Winner { get; set; }
         public string Loser { get; set; }
 
-        public int WID { get; set; }
-        public int LID { get; set; }
+        public int WID { get; set; } //winner ID
+        public int LID { get; set; } //loser ID
 
         public int WTotalScore { get; set; }
         public int LTotalScore { get; set; }
