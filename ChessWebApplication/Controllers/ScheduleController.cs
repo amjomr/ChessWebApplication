@@ -9,12 +9,14 @@ namespace ChessWebApplication.Controllers
     public class ScheduleController : Controller
     {
         private const int BYE = -1;
-        private void RotateArray(int[] teams)
-        {
-            int tmp = teams[teams.Length - 1];
-            Array.Copy(teams, 0, teams, 1, teams.Length - 1);
-            teams = tmp;
-        }
+
+        //private void RotateArray(int[] teams)
+        //{
+
+        //    int[] tmp = teams[teams.Length - 1];
+        //    Array.Copy(teams, 0, teams, 1, teams.Length - 1);
+        //    teams = tmp;
+        //}
         private int [,] GenerateScheduleOdd(int num_teams)
         {
             int n2 = (int)((num_teams - 1) / 2);
@@ -35,7 +37,7 @@ namespace ChessWebApplication.Controllers
 
                 results[teams[0], round] = BYE;
 
-                RotateArray(teams);
+                //RotateArray(teams);
             }
             return results;
         }
@@ -53,14 +55,16 @@ namespace ChessWebApplication.Controllers
                 }
                 else
                 {
-                    results2[num_teams, round] = resulots[num_teams, round];
+                    results2[num_teams, round] = results[num_teams, round];
                 }
             }
+
+            // project
             return results2;
         }
         private int[,] GenerateSchedule(int num_teams)
         {
-            if (num_teams % 2 = 0)
+            if (num_teams % 2 == 0)
                 return GenerateScheduleEven(num_teams);
             else
                 return GenerateScheduleOdd(num_teams);
