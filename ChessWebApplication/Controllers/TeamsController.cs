@@ -72,7 +72,7 @@ namespace ChessWebApplication.Controllers
             }
             return View(team);
         }
-
+        // test ti push Amjad
         // GET: Teams/Create
         public ActionResult Create()
         {

@@ -22,10 +22,10 @@ namespace ChessWebApplication.Models
 
         public List<Team> Teams { get; set; }
 
-        public class TeamBContext : DbContext
-        {
-            public DbSet<Schedule> Schedules { get; set; }
-        }
+    }
 
+    public class TeamDBContext : DbContext
+    {
+        public DbSet<Schedule> Schedules { get; set; }
     }
 }
