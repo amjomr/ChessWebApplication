@@ -86,6 +86,7 @@ namespace ChessWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Name,Totalscore")] Team team)
         {
+
             if (ModelState.IsValid)
             {
                 db.Team.Add(team);
