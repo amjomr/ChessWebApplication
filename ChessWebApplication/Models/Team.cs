@@ -18,5 +18,7 @@ namespace ChessWebApplication.Models
     public class TeamDBContext : DbContext
     {
         public DbSet<Team> Team { get; set; }
+
+        public System.Data.Entity.DbSet<ChessWebApplication.Models.Schedule> Schedules { get; set; }
     }
 }
