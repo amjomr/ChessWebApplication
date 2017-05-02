@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using ChessWebApplication.Models;
 namespace ChessWebApplication.Controllers
 {
     public class ScheduleController : Controller
     {
         private const int BYE = -1;
 
-        //private void RotateArray(int[] teams)
-        //{
+        private void RotateArray(int[] teams)
+        {
 
-        //    int[] tmp = teams[teams.Length - 1];
-        //    Array.Copy(teams, 0, teams, 1, teams.Length - 1);
-        //    teams = tmp;
-        //}
-        private int [,] GenerateScheduleOdd(int num_teams)
+            //    int tmp = teams[teams.Length - 1];
+            Array.Copy(teams, 0, teams, 1, teams.Length - 1);
+            //    teams = tmp;
+        }
+        private int[,] GenerateScheduleOdd(int num_teams)
         {
             int n2 = (int)((num_teams - 1) / 2);
             int[,] results = new int[num_teams, num_teams];
@@ -27,7 +27,7 @@ namespace ChessWebApplication.Controllers
 
             for (int round = 0; round < n2; round++)
             {
-                for (int i = 0; i <n2; i++)
+                for (int i = 0; i < n2; i++)
                 {
                     int team1 = teams[n2 - i];
                     int team2 = teams[n2 + i + 1];
@@ -37,7 +37,7 @@ namespace ChessWebApplication.Controllers
 
                 results[teams[0], round] = BYE;
 
-                //RotateArray(teams);
+                RotateArray(teams);
             }
             return results;
         }
@@ -48,7 +48,7 @@ namespace ChessWebApplication.Controllers
             int[,] results2 = new int[num_teams, num_teams - 1];
             for (int round = 0; round < num_teams - 1; round++)
             {
-                if (results[num_teams,round] == BYE)
+                if (results[num_teams, round] == BYE)
                 {
                     results2[num_teams, round] = num_teams - 1;
                     results2[num_teams - 1, round] = num_teams;
@@ -69,10 +69,38 @@ namespace ChessWebApplication.Controllers
             else
                 return GenerateScheduleOdd(num_teams);
         }
-        // GET: Schedule
+        public List<Schedule> GetScheduleList()
+        {
+            return new List<Schedule>
+        {
+            new Schedule
+            {
+                Date = DateTime.Today,
+                Team1Id = "Vandals",
+                Team2Id= "WSU",
+            },
+            new Schedule
+            {
+                Date = DateTime.Today,
+                Team1Id = "WU",
+                Team2Id = "Warriors",
+            },
+            new Schedule
+            {
+                Date = DateTime.Today,
+                Team1Id = "WSU",
+                Team2Id = "WU",
+            }
+            };
+        }
+            // GET: Schedule
         public ActionResult Index()
         {
-            return View();
+            var schedule = from r in GetScheduleList()
+                          select r;
+            return View(schedule);
+        }
         }
     }
-}
+
+
