@@ -51,7 +51,7 @@ namespace ChessWebApplication.Controllers
         public ActionResult Index()
         {
             var teams = from e in GetTeamList()
-                        orderby e.ID
+                        orderby e.Totalscore
                         select e;
             return View(teams);
 
