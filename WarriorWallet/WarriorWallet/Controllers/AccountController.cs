@@ -8,11 +8,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using ChessWebApplication.Models;
+using WarriorWallet.Models;
 
-// This is comment 2 bnbnb
-
-namespace ChessWebApplication.Controllers
+namespace WarriorWallet.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -144,7 +142,6 @@ namespace ChessWebApplication.Controllers
             return View();
         }
 
-       
         //
         // POST: /Account/Register
         [HttpPost]

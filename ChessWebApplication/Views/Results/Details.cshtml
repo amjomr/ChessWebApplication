@@ -1,0 +1,66 @@
+﻿@model ChessWebApplication.Models.Results
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Results</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Winner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Winner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Loser)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Loser)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WTotalScore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WTotalScore)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LTotalScore)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LTotalScore)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.WeekNum }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
