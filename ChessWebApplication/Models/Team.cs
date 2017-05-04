@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using ChessWebApplication.Models;
 
-
+namespace ChessWebApplication.Models
+{
     public class Team
     {
         public int ID { get; set; }
@@ -13,7 +15,7 @@ using System.Data.Entity;
 
         public List<ChessWebApplication.Models.Schedule> Schedules { get; set; }
     }
-
+}
     public class TeamDBContext : DbContext
     {
         public DbSet<Team> Team { get; set; }
