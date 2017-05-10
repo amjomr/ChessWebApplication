@@ -44,6 +44,43 @@ namespace ChessWebApplication.Controllers
                 Name = "WU Team",
                 Totalscore = 454
             },
+             new Team
+            {
+                ID = 5,
+                Name = "FFF Team",
+                Totalscore = 321
+            },
+              new Team
+            {
+                ID = 6,
+                Name = "WRE Team",
+                Totalscore = 275
+            },
+               new Team
+            {
+                ID = 7,
+                Name = "YRE Team",
+                Totalscore = 423
+            },
+                new Team
+            {
+                ID = 8,
+                Name = "REW Team",
+                Totalscore = 424
+            },
+                 new Team
+            {
+                ID = 9,
+                Name = "SRE Team",
+                Totalscore = 444
+            },
+                  new Team
+            {
+                ID = 10,
+                Name = "EMS Team",
+                Totalscore = 423
+            },
+        };
         };
        }
 
