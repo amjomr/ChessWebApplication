@@ -13,7 +13,7 @@ namespace ChessWebApplication.Models
         public string Name { get; set; }
         public int Totalscore { get; set; }
 
-        public List<ChessWebApplication.Models.Schedule> Schedules { get; set; }
+        public List<Schedule> Schedules { get; set; }
     }
 }
     public class TeamDBContext : DbContext
