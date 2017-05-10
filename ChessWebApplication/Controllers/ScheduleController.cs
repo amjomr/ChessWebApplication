@@ -62,6 +62,7 @@ namespace ChessWebApplication.Controllers
                     for (int j = 0; j < TotalGames(teams) / 6; j++)
                     {
                         game = Tuple.Create<List<string>, DateTime>(listOfGames[count], times[i]);
+                    schedule[count] = game;
                         count++;
                     }
                     
