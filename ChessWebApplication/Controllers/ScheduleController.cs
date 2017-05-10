@@ -8,92 +8,50 @@ namespace ChessWebApplication.Controllers
 {
     public class ScheduleController : Controller
     {
-        private const int BYE = -1;
-
-        private void RotateArray(int[] teams)
+        public int TimesPlayed = 2;
+        int TotalGames(string[] teams)
         {
-
-            //    int tmp = teams[teams.Length - 1];
-            Array.Copy(teams, 0, teams, 1, teams.Length - 1);
-            //    teams = tmp;
+            int numberOfGames = 0;
+            for (int initialGames = teams.Length - 1; initialGames > 0; initialGames--)
+                numberOfGames += initialGames;
+            numberOfGames = numberOfGames * TimesPlayed;
+            return numberOfGames;
         }
-        private int[,] GenerateScheduleOdd(int num_teams)
+        List<List<List<string>>> GenerateSchedule(string[] teams)
         {
-            int n2 = (int)((num_teams - 1) / 2);
-            int[,] results = new int[num_teams, num_teams];
-
-            int[] teams = new int[num_teams];
-            for (int i = 0; i < num_teams; i++) ;
-
-            for (int round = 0; round < n2; round++)
+            int numberOfGames = TotalGames(teams);
+            string team1 = "";
+            string team2 = "";
+            List<string> game = new List<string>();
+            List<List<List<string>>> ScheduleList = new List<List<List<string>>>();
+            List<List<string>> FirstSchedule = new List<List<string>>();
+            for (int i = 0; i < teams.Length; i++)
             {
-                for (int i = 0; i < n2; i++)
+                team1 = teams[1];
+                game.Add(team1);
+                for (int j = i + 1; j < teams.Length; j++)
                 {
-                    int team1 = teams[n2 - i];
-                    int team2 = teams[n2 + i + 1];
-                    results[team1, round] = team2;
-                    results[team2, round] = team1;
-                }
-
-                results[teams[0], round] = BYE;
-
-                RotateArray(teams);
-            }
-            return results;
-        }
-        private int[,] GenerateScheduleEven(int num_teams)
-        {
-            int[,] results = GenerateScheduleOdd(num_teams - 1);
-
-            int[,] results2 = new int[num_teams, num_teams - 1];
-            for (int round = 0; round < num_teams - 1; round++)
-            {
-                if (results[num_teams, round] == BYE)
-                {
-                    results2[num_teams, round] = num_teams - 1;
-                    results2[num_teams - 1, round] = num_teams;
-                }
-                else
-                {
-                    results2[num_teams, round] = results[num_teams, round];
+                    team2 = teams[j];
+                    game.Add(team2);
+                    FirstSchedule.Add(game);
+                    game.RemoveAt(2);
                 }
             }
+            for (int n = 0; n < TimesPlayed; n++)
+                ScheduleList.Add(FirstSchedule);
 
-            // project
-            return results2;
+                return ScheduleList;
         }
-        private int[,] GenerateSchedule(int num_teams)
-        {
-            if (num_teams % 2 == 0)
-                return GenerateScheduleEven(num_teams);
-            else
-                return GenerateScheduleOdd(num_teams);
+       
         }
         public List<Schedule> GetScheduleList()
         {
-            return new List<Schedule>
-        {
-            new Schedule
-            {
-                Date = DateTime.Today,
-                Team1Id = "Vandals",
-                Team2Id= "WSU",
-            },
-            new Schedule
-            {
-                Date = DateTime.Today,
-                Team1Id = "WU",
-                Team2Id = "Warriors",
-            },
-            new Schedule
-            {
-                Date = DateTime.Today,
-                Team1Id = "WSU",
-                Team2Id = "WU",
-            }
-            };
+            List<Schedule> result = new List<Schedule>();
+
+
+
+            return result;
         }
-            // GET: Schedule
         public ActionResult Index()
         {
             var schedule = from r in GetScheduleList()
@@ -101,6 +59,6 @@ namespace ChessWebApplication.Controllers
             return View(schedule);
         }
         }
-    }
+
 
 
