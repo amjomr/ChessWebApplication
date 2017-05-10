@@ -50,12 +50,10 @@ namespace ChessWebApplication.Controllers
         // GET: Teams
         public ActionResult Index()
         {
-            //var teams = from e in GetTeamList()
-            //            orderby e.Totalscore
-            //            select e;
-            //return View(teams);
-
-            return View(db.Team.ToList());
+            var teams = from e in GetTeamList()
+                        orderby e.Totalscore
+                        select e;
+            return View(teams);
         }
 
         // GET: Teams/Details/5
