@@ -10,6 +10,13 @@ namespace ChessWebApplication.Controllers
     {
         public int TimesPlayed = 2;
         public int numberOfWeeks = 8;
+        public string[] teamList = new string[10];
+        public string[] GenTeamList()
+        {
+            for (int x = 0; x < 10; x++)
+                teamList[x] = "team" + x;
+            return teamList;
+        }
         int TotalGames(string[] teams)
         {
             int numberOfGames = 0;
@@ -42,7 +49,8 @@ namespace ChessWebApplication.Controllers
         public List<DateTime> TimeSchedule(DateTime StartDate)
         {
             List<DateTime> gameDays = new List<DateTime>();
-            for (int i = 0; i < numberOfWeeks;)
+            gameDays.Add(StartDate);
+            for (int i = 1; i < numberOfWeeks;)
             {
                 gameDays.Add(StartDate.AddDays(i * 7));
             }
@@ -53,7 +61,6 @@ namespace ChessWebApplication.Controllers
             Tuple<List<string>, DateTime>[] schedule = new Tuple<List<string>, DateTime>[TotalGames(teams)];
             List<DateTime> times = TimeSchedule(StartDate);
             List<List<string>> listOfGames = GenerateGames(teams);
-            List<List<string>> games;
             Tuple<List<string>, DateTime> game;
             int count = 0;
             for (int i = 0; i < 6; i++)
@@ -62,7 +69,7 @@ namespace ChessWebApplication.Controllers
                     for (int j = 0; j < TotalGames(teams) / 6; j++)
                     {
                         game = Tuple.Create<List<string>, DateTime>(listOfGames[count], times[i]);
-                    schedule[count] = game;
+                        schedule[count] = game;
                         count++;
                     }
                     
@@ -74,19 +81,18 @@ namespace ChessWebApplication.Controllers
 
     
        
-        public List<Schedule> GetScheduleList()
-        {
-            List<Schedule> result = new List<Schedule>();
+        //public List<Schedule> GetScheduleList()
+        //{
+        //    List<Schedule> result = new List<Schedule>();
 
 
 
-            return result;
-        }
+        //    return result;
+        //}
         public ActionResult Index()
         {
-            var schedule = from r in GetScheduleList()
-                          select r;
-            return View(schedule);
+            ViewBag.Array = GenerateSchedule(GenTeamList(), DateTime.Today);
+            return View();
         }
         }
 }

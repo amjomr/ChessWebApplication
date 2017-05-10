@@ -81,7 +81,7 @@ namespace ChessWebApplication.Controllers
                 Totalscore = 423
             },
         };
-        };
+        
        }
 
         // GET: Teams
