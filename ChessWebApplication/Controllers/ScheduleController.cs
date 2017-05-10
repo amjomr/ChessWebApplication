@@ -41,7 +41,7 @@ namespace ChessWebApplication.Controllers
                     team2 = teams[j];
                     game.Add(team2);
                     ScheduleList.Add(game);
-                    game.RemoveAt(2);
+                    game.RemoveAt(1);
                 }
             }
                 return ScheduleList;
@@ -50,7 +50,7 @@ namespace ChessWebApplication.Controllers
         {
             List<DateTime> gameDays = new List<DateTime>();
             gameDays.Add(StartDate);
-            for (int i = 1; i < numberOfWeeks;)
+            for (int i = 1; i < numberOfWeeks; i++)
             {
                 gameDays.Add(StartDate.AddDays(i * 7));
             }
@@ -70,6 +70,11 @@ namespace ChessWebApplication.Controllers
                     {
                         game = Tuple.Create<List<string>, DateTime>(listOfGames[count], times[i]);
                         schedule[count] = game;
+                        if (count == 44)
+                    {
+                        count = 0;
+                    }
+                    else  
                         count++;
                     }
                     
