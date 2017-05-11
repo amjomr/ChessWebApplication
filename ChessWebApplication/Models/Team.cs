@@ -5,11 +5,13 @@ using System.Web;
 using System.Data.Entity;
 using ChessWebApplication.Models;
 using System.Data.Entity.Migrations;
+using System.ComponentModel.DataAnnotations;
 
 namespace ChessWebApplication.Models
 {
     public class Team
     {
+        [Key]
         public int ID { get; set; }
         public string Name { get; set; }
         public int Totalscore { get; set; }
