@@ -183,6 +183,21 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ChessDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChessDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChessDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChessDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ChessDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChessDB.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\DBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -200,14 +215,21 @@
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Result.cs">
+      <DependentUpon>ChessDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Results.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\Schedule.cs">
+      <DependentUpon>ChessDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Schedules.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\Team.cs">
+      <DependentUpon>ChessDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Teams.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -221,6 +243,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\ChessDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ChessDB.edmx</DependentUpon>
+      <LastGenOutput>ChessDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ChessDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ChessDB.edmx</DependentUpon>
+      <LastGenOutput>ChessDB.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\DBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>DBModel.Context.cs</LastGenOutput>
@@ -247,6 +279,14 @@
     <Content Include="Models\DBModel.edmx.diagram">
       <DependentUpon>DBModel.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\ChessDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ChessDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ChessDB.edmx.diagram">
+      <DependentUpon>ChessDB.edmx</DependentUpon>
+    </Content>
+    <Content Include="ClassDiagram1.cd" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

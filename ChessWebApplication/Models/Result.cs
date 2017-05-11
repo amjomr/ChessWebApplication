@@ -12,12 +12,10 @@ namespace ChessWebApplication.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Schedule
+    public partial class Result
     {
-        public int ScheduleId { get; set; }
-        public int FirstTeamId { get; set; }
-        public int SecondTeamId { get; set; }
-        public System.DateTime Date { get; set; }
-        public Nullable<int> ResultsId { get; set; }
+        public int ResultsId { get; set; }
+        public int WinnerId { get; set; }
+        public Nullable<int> LoserId { get; set; }
     }
 }

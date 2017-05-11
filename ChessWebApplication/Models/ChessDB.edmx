@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ChessDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ChessDB.dbo.Results' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Results">
+          <Key>
+            <PropertyRef Name="ResultsId" />
+            <PropertyRef Name="WinnerId" />
+          </Key>
+          <Property Name="ResultsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WinnerId" Type="int" Nullable="false" />
+          <Property Name="LoserId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ChessDB.dbo.Schedules' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Schedules">
+          <Key>
+            <PropertyRef Name="ScheduleId" />
+            <PropertyRef Name="FirstTeamId" />
+            <PropertyRef Name="SecondTeamId" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ScheduleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstTeamId" Type="int" Nullable="false" />
+          <Property Name="SecondTeamId" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="ResultsId" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ChessDB.dbo.Teams' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TotalScore" Type="decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityContainer Name="ChessDBModelStoreContainer">
+          <EntitySet Name="Results" EntityType="Self.Results" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Results].[ResultsId] AS [ResultsId], 
+    [Results].[WinnerId] AS [WinnerId], 
+    [Results].[LoserId] AS [LoserId]
+    FROM [dbo].[Results] AS [Results]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Schedules" EntityType="Self.Schedules" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Schedules].[ScheduleId] AS [ScheduleId], 
+    [Schedules].[FirstTeamId] AS [FirstTeamId], 
+    [Schedules].[SecondTeamId] AS [SecondTeamId], 
+    [Schedules].[Date] AS [Date], 
+    [Schedules].[ResultsId] AS [ResultsId]
+    FROM [dbo].[Schedules] AS [Schedules]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Teams" EntityType="Self.Teams" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Teams].[Id] AS [Id], 
+    [Teams].[Name] AS [Name], 
+    [Teams].[TotalScore] AS [TotalScore]
+    FROM [dbo].[Teams] AS [Teams]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ChessDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="ResultsId" />
+            <PropertyRef Name="WinnerId" />
+          </Key>
+          <Property Name="ResultsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WinnerId" Type="Int32" Nullable="false" />
+          <Property Name="LoserId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="ScheduleId" />
+            <PropertyRef Name="FirstTeamId" />
+            <PropertyRef Name="SecondTeamId" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="ScheduleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstTeamId" Type="Int32" Nullable="false" />
+          <Property Name="SecondTeamId" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ResultsId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TotalScore" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityContainer Name="ChessDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Results" EntityType="Self.Result" />
+          <EntitySet Name="Schedules" EntityType="Self.Schedule" />
+          <EntitySet Name="Teams" EntityType="Self.Team" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ChessDBModelStoreContainer" CdmEntityContainer="ChessDBEntities">
+          <EntitySetMapping Name="Results">
+            <EntityTypeMapping TypeName="ChessDBModel.Result">
+              <MappingFragment StoreEntitySet="Results">
+                <ScalarProperty Name="ResultsId" ColumnName="ResultsId" />
+                <ScalarProperty Name="WinnerId" ColumnName="WinnerId" />
+                <ScalarProperty Name="LoserId" ColumnName="LoserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedules">
+            <EntityTypeMapping TypeName="ChessDBModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedules">
+                <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
+                <ScalarProperty Name="FirstTeamId" ColumnName="FirstTeamId" />
+                <ScalarProperty Name="SecondTeamId" ColumnName="SecondTeamId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ResultsId" ColumnName="ResultsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="ChessDBModel.Team">
+              <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TotalScore" ColumnName="TotalScore" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

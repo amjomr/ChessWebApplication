@@ -90,15 +90,15 @@ namespace ChessWebApplication.Controllers
         {
             new Schedule
             {
-                Id = 1,
-                team1 = "Warriors Team",
-                team2 = "Vandals Team",
+                ScheduleId = 1,
+                FirstTeamId = "Warriors Team",
+                SecondTeamId = "Vandals Team",
                 Date = DateTime.Today
             },
             new Schedule
             {
                 Id = 1,
-                team1 = "WSU Team",
+                Team1 = "WSU Team",
                 team2 = "WU Team",
                 Date = DateTime.Today
             },
@@ -133,8 +133,8 @@ namespace ChessWebApplication.Controllers
                new Schedule
             {
                 Id = 1,
-                team1 = "WSU Team",
-                team2 = "WU Team",
+                FirstTeamId = "WSU Team",
+                SecondTeamId = "WU Team",
                 Date = DateTime.Today
             },
                 new Schedule
