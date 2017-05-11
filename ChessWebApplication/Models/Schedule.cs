@@ -9,19 +9,8 @@ namespace ChessWebApplication.Models
 {
     public class Schedule
     {
-      
-
         [Key]
-        public int Id { get; set; }
-
-        public string Team1Id { get; set; }
-
-        public string Team2Id { get; set; }
-
-        public DateTime Date { get; set; }
-
-        public List<Team> Teams { get; set; }
-
+        public Tuple<List<String>, DateTime> Id { get; set; }
     }
 
     public class TeamDBContext : DbContext

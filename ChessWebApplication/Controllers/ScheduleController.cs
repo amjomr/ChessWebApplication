@@ -23,13 +23,14 @@ namespace ChessWebApplication.Controllers
             numberOfGames = numberOfGames * TimesPlayed;
             return numberOfGames;
         }
-        public List<List<string>> GenerateGames(string[] teams)
+        public List<string[]> GenerateGames(string[] teams)
         {
             int numberOfGames = TotalGames(teams);
             string team1;
             string team2;
             List<string> game = new List<string>();
-            List<List<string>> ScheduleList = new List<List<string>>();
+            List<string[]> ScheduleList = new List<string[]>();
+            string[] item = new string[2];
             for (int i = 0; i < teams.Length; i++)
             {
                 team1 = teams[1];
@@ -38,7 +39,8 @@ namespace ChessWebApplication.Controllers
                 {
                     team2 = teams[j];
                     game.Add(team2);
-                    ScheduleList.Add(game);
+                    item = game.ToArray();
+                    ScheduleList.Add(item);
                     game.RemoveAt(1);
                 }
             }
@@ -54,21 +56,21 @@ namespace ChessWebApplication.Controllers
             }
                 return gameDays;
         }
-        public Tuple<List<string>, DateTime>[] GenerateSchedule(string[] teams, DateTime StartDate)
+        public Tuple<string[], DateTime>[] GenerateSchedule(string[] teams, DateTime StartDate)
         {
-            Tuple<List<string>, DateTime>[] schedule = new Tuple<List<string>, DateTime>[TotalGames(teams)];
+            Tuple<string[], DateTime>[] schedule = new Tuple<string[], DateTime>[TotalGames(teams)];
             List<DateTime> times = TimeSchedule(StartDate);
-            List<List<string>> listOfGames = GenerateGames(teams);
-            Tuple<List<string>, DateTime> game;
+            List<string[]> listOfGames = GenerateGames(teams);
+            Tuple<string[], DateTime> game;
             int count = 0;
             for (int i = 0; i < 6; i++)
             {
 
                     for (int j = 0; j < TotalGames(teams) / 6; j++)
                     {
-                        game = Tuple.Create<List<string>, DateTime>(listOfGames[count], times[i]);
+                        game = Tuple.Create(listOfGames[count], times[i]);
                         schedule[count] = game;
-                        if (count == 44)
+                        if (count == TotalGames(teams)/2 -1)
                     {
                         count = 0;
                     }
@@ -83,19 +85,19 @@ namespace ChessWebApplication.Controllers
         }
 
     
-       
-        //public List<Schedule> GetScheduleList()
-        //{
-        //    List<Schedule> result = new List<Schedule>();
-
-
-
-        //    return result;
-        //}
         public ActionResult Index()
         {
-            ViewBag.Array = GenerateSchedule(GenTeamList(), DateTime.Today);
-            return View();
+            Tuple<string[], DateTime>[] Schedule = GenerateSchedule(GenTeamList(), DateTime.Today);
+            string[] s = Schedule.ToArray();
+            string[] item = ;
+
+            var team1 = from x in Schedule
+                        select x.Item1[0];
+            var team2 = from k in Schedule
+                        select k.Item1[1];
+            var Date = from j in Schedule
+                       select j.Item2;
+            return View(team1,team2,Date);
         }
     }
 }
