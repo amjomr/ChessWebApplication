@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using ChessWebApplication.Models;
+using System.Data.Entity.Migrations;
 
 namespace ChessWebApplication.Controllers
 {
@@ -14,6 +13,7 @@ namespace ChessWebApplication.Controllers
     public class TeamsController : Controller
     {
         private TeamDBContext db = new TeamDBContext();
+
 
         [NonAction]
         public List<Team> GetTeamList()
@@ -86,10 +86,12 @@ namespace ChessWebApplication.Controllers
         // GET: Teams
         public ActionResult Index()
         {
-            var teams = from e in GetTeamList()
-                        orderby e.Totalscore
-                        select e;
-            return View(teams);
+            //var teams = from e in GetTeamList()
+            //            orderby e.Totalscore
+            //            select e;
+            //return View(teams);
+            return View(db.Team.ToList());    //THIS IS BROKEN
+                                              //To get the page to display, comment out line 93 and un-comment 89-92
         }
 
         // GET: Teams/Details/5
