@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using ChessWebApplication.Models;
+using System.Data.Entity.Migrations;
 
 namespace ChessWebApplication.Models
 {
@@ -19,6 +20,5 @@ namespace ChessWebApplication.Models
     public class TeamDBContext : DbContext
     {
         public DbSet<Team> Team { get; set; }
-
         public System.Data.Entity.DbSet<ChessWebApplication.Models.Schedule> Schedules { get; set; }
-    }
+}

@@ -20,7 +20,7 @@ namespace ChessWebApplication.Models
 
         public DateTime Date { get; set; }
 
-        //public List<Team> Teams { get; set; }
+        public List<Team> Teams { get; set; }
 
     }
 
