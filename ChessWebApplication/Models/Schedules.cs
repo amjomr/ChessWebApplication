@@ -12,12 +12,16 @@ namespace ChessWebApplication.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Results
+    public partial class Schedules
     {
         public int Id { get; set; }
-        public int WinnerId { get; set; }
-        public int LoserId { get; set; }
+        public string FirstTeam { get; set; }
+        public string SecondTeam { get; set; }
+        public System.TimeSpan Date { get; set; }
+        public int ResultsId { get; set; }
+        public int TeamsId { get; set; }
     
-        public virtual Schedules Schedule { get; set; }
+        public virtual Teams Team { get; set; }
+        public virtual Results Result { get; set; }
     }
 }

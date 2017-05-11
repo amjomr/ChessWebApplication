@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DBModelStoreContainer">
+    <EntitySet Name="Teams" EntityType="DBModel.Store.Teams" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Schedules" EntityType="DBModel.Store.Schedules" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Results" EntityType="DBModel.Store.Results" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="TeamsSchedules" Association="DBModel.Store.TeamsSchedules">
+      <End Role="Teams" EntitySet="Teams" />
+      <End Role="Schedules" EntitySet="Schedules" />
+    </AssociationSet>
+    <AssociationSet Name="SchedulesResults" Association="DBModel.Store.SchedulesResults">
+      <End Role="Schedules" EntitySet="Schedules" />
+      <End Role="Results" EntitySet="Results" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Teams">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Totalscore" Type="decimal" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Schedules">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstTeam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SecondTeam" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date" Type="time" Nullable="false" />
+    <Property Name="ResultsId" Type="int" Nullable="false" />
+    <Property Name="TeamsId" Type="int" Nullable="false" />
+    <Property Name="Result_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Results">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WinnerId" Type="int" Nullable="false" />
+    <Property Name="LoserId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="TeamsSchedules">
+    <End Role="Teams" Type="DBModel.Store.Teams" Multiplicity="1" />
+    <End Role="Schedules" Type="DBModel.Store.Schedules" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teams">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Schedules">
+        <PropertyRef Name="TeamsId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SchedulesResults">
+    <End Role="Schedules" Type="DBModel.Store.Schedules" Multiplicity="*" />
+    <End Role="Results" Type="DBModel.Store.Results" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Results">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Schedules">
+        <PropertyRef Name="Result_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="DBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DBModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Teams" EntityType="DBModel.Teams" />
+          <EntitySet Name="Schedules" EntityType="DBModel.Schedules" />
+          <EntitySet Name="Results" EntityType="DBModel.Results" />
+          <AssociationSet Name="TeamsSchedules" Association="DBModel.TeamsSchedules">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="Schedules" EntitySet="Schedules" />
+          </AssociationSet>
+          <AssociationSet Name="SchedulesResults" Association="DBModel.SchedulesResults">
+            <End Role="Schedules" EntitySet="Schedules" />
+            <End Role="Results" EntitySet="Results" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Totalscore" Type="Decimal" Nullable="true" />
+          <NavigationProperty Name="Schedules" Relationship="DBModel.TeamsSchedules" FromRole="Teams" ToRole="Schedules" />
+        </EntityType>
+        <EntityType Name="Schedules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstTeam" Type="String" Nullable="false" />
+          <Property Name="SecondTeam" Type="String" Nullable="false" />
+          <Property Name="Date" Type="Time" Nullable="false" />
+          <Property Name="ResultsId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Team" Relationship="DBModel.TeamsSchedules" FromRole="Schedules" ToRole="Teams" />
+          <Property Name="TeamsId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Result" Relationship="DBModel.SchedulesResults" FromRole="Schedules" ToRole="Results" />
+        </EntityType>
+        <EntityType Name="Results">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WinnerId" Type="Int32" Nullable="false" />
+          <Property Name="LoserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Schedule" Relationship="DBModel.SchedulesResults" FromRole="Results" ToRole="Schedules" />
+        </EntityType>
+        <Association Name="TeamsSchedules">
+          <End Type="DBModel.Teams" Role="Teams" Multiplicity="1" />
+          <End Type="DBModel.Schedules" Role="Schedules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Schedules">
+              <PropertyRef Name="TeamsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SchedulesResults">
+          <End Type="DBModel.Schedules" Role="Schedules" Multiplicity="1" />
+          <End Type="DBModel.Results" Role="Results" Multiplicity="1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBModelStoreContainer" CdmEntityContainer="DBModelContainer">
+    <EntitySetMapping Name="Teams">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.Teams)">
+        <MappingFragment StoreEntitySet="Teams">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Totalscore" ColumnName="Totalscore" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Schedules">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.Schedules)">
+        <MappingFragment StoreEntitySet="Schedules">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstTeam" ColumnName="FirstTeam" />
+          <ScalarProperty Name="SecondTeam" ColumnName="SecondTeam" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ResultsId" ColumnName="ResultsId" />
+          <ScalarProperty Name="TeamsId" ColumnName="TeamsId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Results">
+      <EntityTypeMapping TypeName="IsTypeOf(DBModel.Results)">
+        <MappingFragment StoreEntitySet="Results">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="WinnerId" ColumnName="WinnerId" />
+          <ScalarProperty Name="LoserId" ColumnName="LoserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="SchedulesResults" TypeName="DBModel.SchedulesResults" StoreEntitySet="Schedules">
+      <EndProperty Name="Results">
+        <ScalarProperty Name="Id" ColumnName="Result_Id" />
+      </EndProperty>
+      <EndProperty Name="Schedules">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -12,12 +12,19 @@ namespace ChessWebApplication.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Results
+    public partial class Teams
     {
-        public int Id { get; set; }
-        public int WinnerId { get; set; }
-        public int LoserId { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Teams()
+        {
+            this.Schedules = new HashSet<Schedules>();
+        }
     
-        public virtual Schedules Schedule { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public Nullable<decimal> Totalscore { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Schedules> Schedules { get; set; }
     }
 }
