@@ -12,7 +12,7 @@ namespace ChessWebApplication.Controllers
 
     public class TeamsController : Controller
     {
-        private TeamDBContext db = new TeamDBContext();
+        private ChessDBEntities db = new ChessDBEntities();
 
 
         [NonAction]
@@ -22,63 +22,63 @@ namespace ChessWebApplication.Controllers
         {
             new Team
             {
-                ID = 1,
+                Id = 1,
                 Name = "Warriors Team",
-                Totalscore = 700
+                TotalScore = 700
             },
             new Team
             {
-                ID = 2,
+                Id = 2,
                 Name = "Vandals Team",
-                Totalscore = 756
+                TotalScore = 756
             },
             new Team
             {
-                ID = 3,
+                Id = 3,
                 Name = "WSU Team",
-                Totalscore = 984
+                TotalScore = 984
             },
             new Team
             {
-                ID = 4,
+                Id = 4,
                 Name = "WU Team",
-                Totalscore = 454
+                TotalScore = 454
             },
              new Team
             {
-                ID = 5,
+                Id = 5,
                 Name = "FFF Team",
-                Totalscore = 321
+                TotalScore = 321
             },
               new Team
             {
-                ID = 6,
+                Id = 6,
                 Name = "WRE Team",
-                Totalscore = 275
+                TotalScore = 275
             },
                new Team
             {
-                ID = 7,
+                Id = 7,
                 Name = "YRE Team",
-                Totalscore = 423
+                TotalScore = 423
             },
                 new Team
             {
-                ID = 8,
+                Id = 8,
                 Name = "REW Team",
-                Totalscore = 424
+                TotalScore = 424
             },
                  new Team
             {
-                ID = 9,
+                Id = 9,
                 Name = "SRE Team",
-                Totalscore = 444
+                TotalScore = 444
             },
                   new Team
             {
-                ID = 10,
+                Id = 10,
                 Name = "EMS Team",
-                Totalscore = 423
+                TotalScore = 423
             },
         };
        }
@@ -87,7 +87,7 @@ namespace ChessWebApplication.Controllers
         public ActionResult Index()
         {
             var teams = from e in GetTeamList()
-                        orderby e.Totalscore
+                        orderby e.TotalScore
                         select e;
             return View(teams);
             //return View(db.Team.ToList());    //THIS IS BROKEN
@@ -101,7 +101,7 @@ namespace ChessWebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Team.Find(id);
+            Team team = db.Teams.Find(id);
             if (team == null)
             {
                 return HttpNotFound();
@@ -125,7 +125,7 @@ namespace ChessWebApplication.Controllers
 
             if (ModelState.IsValid)
             {
-                db.Team.Add(team);
+                db.Teams.Add(team);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -141,7 +141,7 @@ namespace ChessWebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Team.Find(id);
+            Team team = db.Teams.Find(id);
             if (team == null)
             {
                 return HttpNotFound();
@@ -172,7 +172,7 @@ namespace ChessWebApplication.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Team team = db.Team.Find(id);
+            Team team = db.Teams.Find(id);
             if (team == null)
             {
                 return HttpNotFound();
@@ -185,8 +185,8 @@ namespace ChessWebApplication.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Team team = db.Team.Find(id);
-            db.Team.Remove(team);
+            Team team = db.Teams.Find(id);
+            db.Teams.Remove(team);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
