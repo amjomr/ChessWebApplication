@@ -96,10 +96,16 @@ namespace ChessWebApplication.Controllers
         //}
         public ActionResult Index()
         {
-            ViewBag.Array = GenerateSchedule(GenTeamList(), DateTime.Today);
-            return View();
+            Tuple<List<string>, DateTime>[] Schedule = GenerateSchedule(GenTeamList(), DateTime.Today);
+            var team1 = from x in Schedule
+                       select x.Item1[0];
+            var team2 = from k in Schedule
+                        select k.Item1[1];
+            var Date = from j in Schedule
+                       select j.Item2;
+            return View(team1);
         }
-        }
+    }
 }
 
 
