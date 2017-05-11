@@ -10,7 +10,13 @@ namespace ChessWebApplication.Models
     public class Schedule
     {
         [Key]
-        public Tuple<List<String>, DateTime> Id { get; set; }
+        public int Id { get; set; }
+
+        public string team1 { get; set; }
+
+        public string team2 { get; set; }
+
+        public DateTime Date { get; set; }
     }
 
     public class TeamDBContext : DbContext

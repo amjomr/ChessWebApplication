@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChessWebApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -83,21 +84,99 @@ namespace ChessWebApplication.Controllers
 
             return schedule;
         }
+        public List<Schedule> GetScheduleList()
+        {
+            return new List<Schedule>
+        {
+            new Schedule
+            {
+                Id = 1,
+                team1 = "Warriors Team",
+                team2 = "Vandals Team",
+                Date = DateTime.Today
+            },
+            new Schedule
+            {
+                Id = 1,
+                team1 = "WSU Team",
+                team2 = "WU Team",
+                Date = DateTime.Today
+            },
+             new Schedule
+            {
+                Id = 1,
+                team1 = "FFF Team",
+                team2 = "WRE Team",
+                Date = DateTime.Today
+            },
+             new Schedule
+            {
+                Id = 1,
+                team1 = "YRE Team",
+                team2 = "REW Team",
+                Date = DateTime.Today
+            },
+             new Schedule
+            {
+                Id = 1,
+                team1 = "SRE Team",
+                team2 = "EMS Team",
+                Date = DateTime.Today
+            },
+              new Schedule
+            {
+                Id = 1,
+                team1 = "Warriors Team",
+                team2 = "Vandals Team",
+                Date = DateTime.Today
+            },
+               new Schedule
+            {
+                Id = 1,
+                team1 = "WSU Team",
+                team2 = "WU Team",
+                Date = DateTime.Today
+            },
+                new Schedule
+            {
+                Id = 1,
+                team1 = "FFF Team",
+                team2 = "WRE Team",
+                Date = DateTime.Today
+            },
+                  new Schedule
+            {
+                Id = 1,
+                team1 = "YRE Team",
+                team2 = "REW Team",
+                Date = DateTime.Today
+            },
+                new Schedule
+            {
+                Id = 1,
+                team1 = "SRE Team",
+                team2 = "EMS Team",
+                Date = DateTime.Today
+            },
+        };
+        }
 
-    
         public ActionResult Index()
         {
-            Tuple<string[], DateTime>[] Schedule = GenerateSchedule(GenTeamList(), DateTime.Today);
-            string[] s = Schedule.ToArray();
-            string[] item = ;
+            //Tuple<string[], DateTime>[] Schedule = GenerateSchedule(GenTeamList(), DateTime.Today);
+            //string[] s = Schedule.ToArray();
+            //string[] item = ;
 
-            var team1 = from x in Schedule
-                        select x.Item1[0];
-            var team2 = from k in Schedule
-                        select k.Item1[1];
-            var Date = from j in Schedule
-                       select j.Item2;
-            return View(team1,team2,Date);
+            //var team1 = from x in Schedule
+            //            select x.Item1[0];
+            //var team2 = from k in Schedule
+            //            select k.Item1[1];
+            //var Date = from j in Schedule
+            //           select j.Item2;
+            var schedule = from e in GetScheduleList()
+                        orderby e.Date
+                        select e;
+            return View(schedule);
         }
     }
 }

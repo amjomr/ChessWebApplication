@@ -86,11 +86,11 @@ namespace ChessWebApplication.Controllers
         // GET: Teams
         public ActionResult Index()
         {
-            //var teams = from e in GetTeamList()
-            //            orderby e.Totalscore
-            //            select e;
-            //return View(teams);
-            return View(db.Team.ToList());    //THIS IS BROKEN
+            var teams = from e in GetTeamList()
+                        orderby e.Totalscore
+                        select e;
+            return View(teams);
+            //return View(db.Team.ToList());    //THIS IS BROKEN
                                               //To get the page to display, comment out line 93 and un-comment 89-92
         }
 
