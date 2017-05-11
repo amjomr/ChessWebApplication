@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChessWebApplication.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -94,8 +95,9 @@ namespace ChessWebApplication.Controllers
         //}
         public ActionResult Index()
         {
-            ViewBag.Array = GenerateSchedule(GenTeamList(), DateTime.Today);
-            return View();
+            Schedule schedule = new Schedule();
+            //schedule = GenerateSchedule(GenTeamList(), DateTime.Today);
+            return View(schedule);
         }
     }
 }
